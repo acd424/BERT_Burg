@@ -1,0 +1,48 @@
+2021-02-23 18:59:56.569225
+data/data_for_label_updated_5.csv
+Total training took 1:46:46 (h:mm:ss)
+       Training Loss Training Time  Valid. Accur.  Valid. Loss Validation Time
+epoch                                                                         
+1               0.69       0:23:32           0.97         0.51         0:02:58
+2               0.48       0:24:44           0.98         0.18         0:03:01
+3               0.28       0:23:17           0.98         0.12         0:02:57
+4               0.19       0:23:18           0.98         0.11         0:02:58
+
+
+##################################################
+2021-02-24 20:20:56.904590
+data/data_for_label_updated.csv
+Total training took 0:45:09 (h:mm:ss)
+       Training Loss Training Time  Valid. Accur.  Valid. Loss Validation Time
+epoch                                                                         
+1               0.14       0:08:03           0.98         0.08         0:03:06
+2               0.06       0:07:45           0.99         0.07         0:03:00
+3               0.02       0:07:52           0.99         0.06         0:03:11
+4               0.01       0:09:03           0.99         0.06         0:03:10
+
+
+##################################################
+2021-02-24 21:20:31.674840
+data/data_for_label_updated.csv
+Total training took 0:42:45 (h:mm:ss)
+       Training Loss Training Time  Valid. Accur.  Valid. Loss Validation Time
+epoch                                                                         
+1               0.95       0:08:08           0.08         1.12         0:02:53
+2               0.96       0:07:42           0.08         1.12         0:02:53
+3               0.94       0:07:38           0.08         1.12         0:02:55
+4               0.94       0:07:40           0.08         1.12         0:02:56
+
+
+##################################################
+2021-03-01 20:17:10.396668
+data/train_white_burg.csv
+Total training took 1:40:46 (h:mm:ss)
+       Training Loss Training Time  Valid. Accur.  Valid. Loss Validation Time
+epoch                                                                         
+1               0.69       0:22:27           0.94         0.62         0:02:54
+2               0.53       0:22:12           0.97         0.18         0:02:55
+3               0.30       0:22:14           0.98         0.10         0:02:56
+4               0.20       0:22:12           0.98         0.08         0:02:56
+
+
+##################################################
