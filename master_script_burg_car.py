@@ -72,9 +72,9 @@ epochs = 4
 batch_size = 16
 
 
-############################ Data stuff ############################
+#### Find the max token length of the individual texts 
 
-## find max length from all documents
+# find max length from all documents
 df = pd.read_csv('data/data_for_test_6.csv', engine = 'python')
 
 sentences = df.CrimeNotes.values
@@ -84,8 +84,7 @@ max_len = get_max_len(sentences, tokenizer)
 
 
 
-
-## read in the validation set ##########
+### read in the validation set 
 valdf = pd.read_csv('data/valid_white_burg.csv', engine = 'c')
 val_sentences = valdf.text_clean.values
 val_labels = valdf.motorvehicle.values
@@ -99,9 +98,15 @@ validation_dataloader = DataLoader(
         )
 
 
-## read in the training set #######
+######### Model build 1 ########
 
+###set the correct variables
+n = 1
+description = "Burg data, car model 1" # description appended to log files 
 training_set = 'data/train_white_burg.csv'
+
+
+## read in the training set #######
 df = pd.read_csv(training_set, engine = 'c')
 sentences = df.text_clean.values
 labels = df.motorvehicle.values
@@ -119,32 +124,88 @@ train_dataloader = DataLoader(
 
 
 
-
-
-
-model = training_function(epochs, model, train_dataloader, validation_dataloader, optimizer, device, training_set)
+#### run the model
+model = training_function(epochs, model, train_dataloader, validation_dataloader, optimizer, device, training_set, description)
 # updates epoc_metrics.txt
 
+model_name = "model.BERT.burg.car.run_" +str(n) +".pth"
 
-torch.save(model, 'model.BERT.runx.pth')
+torch.save(model, model_name)
 
 
 ###### label all of the data and the validation set
 
 
-# these functions ingest the first filename and then create a labelled set with probabilites with the second filename
-label_unlabelled('data/validation_set_2.csv', 'results_test.csv', max_len, tokenizer, model, 'TRUE')
+### these functions ingest the data from the first filename and then creates a labelled set with probabilites with the second filename
+
+##this uses the validation set to get model metrics
+label_unlabelled('data/validation_set_2.csv', 'results_test.csv', max_len, tokenizer, model, 'TRUE', description)
 # updates model_run_metrics.txt
 # labels the first file
 # send results to the second file
 
-label_unlabelled('data/data_for_test_6.csv', 'results_test.csv', max_len, tokenizer, model, 'FALSE')
+## this function estimates labels for all of the unlabelled examples to allow active learning algo to select the required 
+label_unlabelled('data/data_for_test_6.csv', 'results_test.csv', max_len, tokenizer, model, 'FALSE', description)
+
+
+######################## Active learning now selects the data to be labelled and used for a second model
+
+# Model build 2
+
+# reset the model
+model = BertForSequenceClassification.from_pretrained(
+    "bert-base-uncased", # Use the 12-layer BERT model, with an uncased vocab.
+    num_labels = 2, # The number of output labels--2 for binary classification.
+                    # You can increase this for multi-class tasks.   
+    output_attentions = False, # Whether the model returns attentions weights.
+    output_hidden_states = False, # Whether the model returns all hidden-states.
+)
+
+# set correct variables
+n = 2
+description = "Burg data, car model 2" # description appended to log files 
+training_set = 'data/train_white_burg.csv'
+
+## read in the training set #######
+df = pd.read_csv(training_set, engine = 'c')
+sentences = df.text_clean.values
+labels = df.motorvehicle.values
+
+train_dataset = prepare_data(sentences, labels, max_len, tokenizer)
+
+
+# Create the DataLoaders for our training and validation sets.
+# We'll take training samples in random order. 
+train_dataloader = DataLoader(
+            train_dataset,  # The training samples.
+            sampler = RandomSampler(train_dataset), # Select batches randomly
+            batch_size = batch_size # Trains with this batch size.
+        )
 
 
 
+#### run the model
+model = training_function(epochs, model, train_dataloader, validation_dataloader, optimizer, device, training_set, description)
+# updates epoc_metrics.txt
+
+model_name = "model.BERT.burg.car.run_" +str(n) +".pth"
+
+torch.save(model, model_name)
 
 
+###### label all of the data and the validation set
 
+
+### these functions ingest the data from the first filename and then creates a labelled set with probabilites with the second filename
+
+##this uses the validation set to get model metrics
+label_unlabelled('data/validation_set_2.csv', 'results_test.csv', max_len, tokenizer, model, 'TRUE', description)
+# updates model_run_metrics.txt
+# labels the first file
+# send results to the second file
+
+## this function estimates labels for all of the unlabelled examples to allow active learning algo to select the required 
+label_unlabelled('data/data_for_test_6.csv', 'results_test.csv', max_len, tokenizer, model, 'FALSE', description)
 
 
 

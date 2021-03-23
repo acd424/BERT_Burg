@@ -1,0 +1,132 @@
+"""
+Created on Sun Feb 14 11:15:19 2021
+
+@author: mm18acd
+"""
+
+def label_unlabelled(test_df_filename, filename, max_len, tokenizer, model, metrics, description):
+    import pandas as pd
+    import numpy as np
+    from prepare_data import prepare_data
+    import torch
+    from torch.utils.data import DataLoader, SequentialSampler
+    import datetime
+    testdf = pd.read_csv(test_df_filename, engine = 'python')
+    #testdf.sample(10)
+    sentences = testdf.text_clean.values
+    labels = testdf.motorvehicle.values
+
+# Set the batch size.  
+    batch_size = 32
+    
+ # Set the device type.   
+    device = torch.device("cpu")
+
+# Create the DataLoader.
+    prediction_data = prepare_data(sentences, labels, max_len, tokenizer)
+    prediction_sampler = SequentialSampler(prediction_data)
+    prediction_dataloader = DataLoader(prediction_data, sampler=prediction_sampler, batch_size=batch_size)
+
+    print('    DONE.')
+    
+    print('Predicting labels for {:,} test sentences...'.format(len(labels)))
+
+    # Put model in evaluation mode
+    model.eval()
+
+    # Tracking variables 
+    predictions , true_labels = [], []
+
+    # Predict 
+    for batch in prediction_dataloader:
+      # Add batch to GPU
+      batch = tuple(t.to(device) for t in batch)
+  
+      # Unpack the inputs from our dataloader
+      b_input_ids, b_input_mask, b_labels = batch
+  
+      # Telling the model not to compute or store gradients, saving memory and 
+      # speeding up prediction
+      with torch.no_grad():
+      # Forward pass, calculate logit predictions
+          outputs = model(b_input_ids, token_type_ids=None, 
+                      attention_mask=b_input_mask)
+
+          logits = outputs[0]
+
+  # Move logits and labels to CPU
+          logits = logits.detach().cpu().numpy()
+          label_ids = b_labels.to('cpu').numpy()
+  
+      # Store predictions and true labels
+          predictions.append(logits)
+          true_labels.append(label_ids)
+
+    print('    DONE.')
+    
+    from sklearn.metrics import matthews_corrcoef, f1_score, precision_score, recall_score
+
+
+    prediction_label = []
+
+    output_1 = []
+
+    output_0 = []
+
+    # Evaluate each test batch using Matthew's correlation coefficient
+    print('Creating the  prediction files')
+
+    # For each input batch...
+    for i in range(len(true_labels)):
+  
+      # The predictions for this batch are a 2-column ndarray (one column for "0" 
+      # and one column for "1"). Pick the label with the highest value and turn this
+      # in to a list of 0s and 1s.
+          pred_labels_i = np.argmax(predictions[i], axis=1).flatten()
+        
+      # Calculate and store the coef for this batch.  
+
+          prediction_label.append(pred_labels_i)
+
+          out_1 = predictions[i][:,1]
+          output_1.append(out_1)
+
+          out_0 = predictions[i][:,0]
+          output_0.append(out_0)
+
+    
+
+
+    x = np.concatenate(prediction_label).ravel()
+
+    testdf["new_label"] = x
+
+    x = np.concatenate(output_0).ravel()
+    testdf["label_0"] = x
+
+    x = np.concatenate(output_1).ravel()
+    testdf["label_1"] = x
+
+    testdf.to_csv(filename) #this is the results from test on validation set
+    print('...Done..... Now metrics')
+    m_c =  matthews_corrcoef(testdf.motorvehicle, testdf.new_label)
+    f1 = f1_score(testdf.motorvehicle, testdf.new_label)
+    prec = precision_score(testdf.motorvehicle, testdf.new_label)
+    recall = recall_score(testdf.motorvehicle, testdf.new_label)
+    
+
+    
+    if metrics == 'TRUE':
+        outfile = open(' model_run_metrics.txt', 'a')
+    
+        print(datetime.datetime.now(), file = outfile)
+        print(filename, file = outfile)
+        print(description, file = outfile)
+        print('\n the matthews corrcoef is :' + str(m_c), file = outfile)
+        print('\n the f1 score is:' + str(f1),file = outfile)
+        print('\n the precision is:' + str(prec), file = outfile)
+        print('\n the recall is:'  + str(recall), file = outfile)
+        print('##################################################' , file = outfile)
+        outfile.close()
+    
+    print('Labelling has finnished, files created')
