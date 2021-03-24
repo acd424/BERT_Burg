@@ -13,7 +13,7 @@ def label_unlabelled(test_df_filename, filename, max_len, tokenizer, model, metr
     import datetime
     testdf = pd.read_csv(test_df_filename, engine = 'python')
     #testdf.sample(10)
-    sentences = testdf.text_clean.values
+    sentences = testdf.CrimeNotes.values
     labels = testdf.motorvehicle.values
 
 # Set the batch size.  

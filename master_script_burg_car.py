@@ -190,7 +190,7 @@ model = training_function(epochs, model, train_dataloader, validation_dataloader
 
 model_name = "model.BERT.burg.car.run_" +str(n) +".pth"
 
-torch.save(model, model_name)
+torch.save(model.state_dict(), model_name)
 
 
 ###### label all of the data and the validation set
@@ -210,5 +210,227 @@ label_unlabelled('data/data_for_test_6.csv', 'results_test.csv', max_len, tokeni
 
 
 
+# Model build 3
+
+# reset the model
+model = BertForSequenceClassification.from_pretrained(
+    "bert-base-uncased", # Use the 12-layer BERT model, with an uncased vocab.
+    num_labels = 2, # The number of output labels--2 for binary classification.
+                    # You can increase this for multi-class tasks.   
+    output_attentions = False, # Whether the model returns attentions weights.
+    output_hidden_states = False, # Whether the model returns all hidden-states.
+)
+
+# set correct variables
+n = 3
+training_set = 'data/data_for_label_updated_2.csv'
 
 
+## read in the training set #######
+df = pd.read_csv(training_set,encoding = "ISO-8859-1", engine = 'c')
+sentences = df.CrimeNotes.values
+labels = df.motorvehicle.values
+
+train_dataset = prepare_data(sentences, labels, max_len, tokenizer)
+
+
+# Create the DataLoaders for our training and validation sets.
+# We'll take training samples in random order. 
+train_dataloader = DataLoader(
+            train_dataset,  # The training samples.
+            sampler = RandomSampler(train_dataset), # Select batches randomly
+            batch_size = batch_size # Trains with this batch size.
+        )
+
+description = "Burg data, car model " +str(n) # description appended to log files 
+
+#### run the model
+model = training_function(epochs, model, train_dataloader, validation_dataloader, optimizer, device, training_set, description)
+# updates epoc_metrics.txt
+
+model_name = "Models/model.BERT.burg.car.run_" +str(n) +".pth"
+
+torch.save(model.state_dict(), model_name)
+
+
+###### label all of the data and the validation set
+
+
+### these functions ingest the data from the first filename and then creates a labelled set with probabilites with the second filename
+
+##this uses the validation set to get model metrics
+save_results_to = 'data/results_val_' +str(n) + '.csv'
+
+
+label_unlabelled('data/validation_set_2.csv', save_results_to , max_len, tokenizer, model, 'TRUE', description)
+
+
+# Model build 4
+
+# reset the model
+model = BertForSequenceClassification.from_pretrained(
+    "bert-base-uncased", # Use the 12-layer BERT model, with an uncased vocab.
+    num_labels = 2, # The number of output labels--2 for binary classification.
+                    # You can increase this for multi-class tasks.   
+    output_attentions = False, # Whether the model returns attentions weights.
+    output_hidden_states = False, # Whether the model returns all hidden-states.
+)
+
+# set correct variables
+n = 4
+training_set = 'data/data_for_label_updated_3.csv'
+
+
+## read in the training set #######
+df = pd.read_csv(training_set,encoding = "ISO-8859-1", engine = 'c')
+sentences = df.CrimeNotes.values
+labels = df.motorvehicle.values
+
+train_dataset = prepare_data(sentences, labels, max_len, tokenizer)
+
+
+# Create the DataLoaders for our training and validation sets.
+# We'll take training samples in random order. 
+train_dataloader = DataLoader(
+            train_dataset,  # The training samples.
+            sampler = RandomSampler(train_dataset), # Select batches randomly
+            batch_size = batch_size # Trains with this batch size.
+        )
+
+description = "Burg data, car model " +str(n) # description appended to log files 
+
+#### run the model
+model = training_function(epochs, model, train_dataloader, validation_dataloader, optimizer, device, training_set, description)
+# updates epoc_metrics.txt
+
+model_name = "Models/model.BERT.burg.car.run_" +str(n) +".pth"
+
+torch.save(model.state_dict(), model_name)
+
+
+###### label all of the data and the validation set
+
+
+### these functions ingest the data from the first filename and then creates a labelled set with probabilites with the second filename
+
+##this uses the validation set to get model metrics
+save_results_to = 'data/results_val_' +str(n) + '.csv'
+
+
+label_unlabelled('data/validation_set_2.csv', save_results_to , max_len, tokenizer, model, 'TRUE', description)
+
+
+
+# Model build 5
+
+# reset the model
+model = BertForSequenceClassification.from_pretrained(
+    "bert-base-uncased", # Use the 12-layer BERT model, with an uncased vocab.
+    num_labels = 2, # The number of output labels--2 for binary classification.
+                    # You can increase this for multi-class tasks.   
+    output_attentions = False, # Whether the model returns attentions weights.
+    output_hidden_states = False, # Whether the model returns all hidden-states.
+)
+
+# set correct variables
+n = 5
+training_set = 'data/data_for_label_updated_4.csv'
+
+
+## read in the training set #######
+df = pd.read_csv(training_set,encoding = "ISO-8859-1", engine = 'c')
+sentences = df.CrimeNotes.values
+labels = df.motorvehicle.values
+
+train_dataset = prepare_data(sentences, labels, max_len, tokenizer)
+
+
+# Create the DataLoaders for our training and validation sets.
+# We'll take training samples in random order. 
+train_dataloader = DataLoader(
+            train_dataset,  # The training samples.
+            sampler = RandomSampler(train_dataset), # Select batches randomly
+            batch_size = batch_size # Trains with this batch size.
+        )
+
+description = "Burg data, car model " +str(n) # description appended to log files 
+
+#### run the model
+model = training_function(epochs, model, train_dataloader, validation_dataloader, optimizer, device, training_set, description)
+# updates epoc_metrics.txt
+
+model_name = "Models/model.BERT.burg.car.run_" +str(n) +".pth"
+
+torch.save(model.state_dict(), model_name)
+
+
+###### label all of the data and the validation set
+
+
+### these functions ingest the data from the first filename and then creates a labelled set with probabilites with the second filename
+
+##this uses the validation set to get model metrics
+save_results_to = 'data/results_val_' +str(n) + '.csv'
+
+
+label_unlabelled('data/validation_set_2.csv', save_results_to , max_len, tokenizer, model, 'TRUE', description)
+
+
+
+
+
+
+
+# Model build 6
+
+# reset the model
+model = BertForSequenceClassification.from_pretrained(
+    "bert-base-uncased", # Use the 12-layer BERT model, with an uncased vocab.
+    num_labels = 2, # The number of output labels--2 for binary classification.
+                    # You can increase this for multi-class tasks.   
+    output_attentions = False, # Whether the model returns attentions weights.
+    output_hidden_states = False, # Whether the model returns all hidden-states.
+)
+
+# set correct variables
+n = 6
+training_set = 'data/data_for_label_updated_5.csv'
+
+
+## read in the training set #######
+df = pd.read_csv(training_set,encoding = "ISO-8859-1", engine = 'c')
+sentences = df.CrimeNotes.values
+labels = df.motorvehicle.values
+
+train_dataset = prepare_data(sentences, labels, max_len, tokenizer)
+
+
+# Create the DataLoaders for our training and validation sets.
+# We'll take training samples in random order. 
+train_dataloader = DataLoader(
+            train_dataset,  # The training samples.
+            sampler = RandomSampler(train_dataset), # Select batches randomly
+            batch_size = batch_size # Trains with this batch size.
+        )
+
+description = "Burg data, car model " +str(n) # description appended to log files 
+
+#### run the model
+model = training_function(epochs, model, train_dataloader, validation_dataloader, optimizer, device, training_set, description)
+# updates epoc_metrics.txt
+
+model_name = "Models/model.BERT.burg.car.run_" +str(n) +".pth"
+
+torch.save(model.state_dict(), model_name)
+
+
+###### label all of the data and the validation set
+
+
+### these functions ingest the data from the first filename and then creates a labelled set with probabilites with the second filename
+
+##this uses the validation set to get model metrics
+save_results_to = 'data/results_val_' +str(n) + '.csv'
+
+
+label_unlabelled('data/validation_set_2.csv', save_results_to , max_len, tokenizer, model, 'TRUE', description)
