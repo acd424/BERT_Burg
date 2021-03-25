@@ -18,7 +18,7 @@ import random
 from additional_functions import get_max_len, format_time, flat_accuracy
 from prepare_data import prepare_data
 from training_function import training_function
-from label_unlabeled import label_unlabelled
+from label_unlabelled import label_unlabelled
 
 from transformers import BertTokenizer
 from torch.utils.data import TensorDataset, random_split
@@ -85,8 +85,8 @@ max_len = get_max_len(sentences, tokenizer)
 
 
 ### read in the validation set 
-valdf = pd.read_csv('data/valid_white_burg.csv', engine = 'c')
-val_sentences = valdf.text_clean.values
+valdf = pd.read_csv('data/validation_set_2_recode.csv', engine = 'c')
+val_sentences = valdf.CrimeNotes.values
 val_labels = valdf.motorvehicle.values
 val_dataset = prepare_data(val_sentences, val_labels, max_len, tokenizer)
 
@@ -103,12 +103,12 @@ validation_dataloader = DataLoader(
 ###set the correct variables
 n = 1
 description = "Burg data, car model 1" # description appended to log files 
-training_set = 'data/train_white_burg.csv'
+training_set = 'data/data_for_label.csv'
 
 
 ## read in the training set #######
 df = pd.read_csv(training_set, engine = 'c')
-sentences = df.text_clean.values
+sentences = df.CrimeNotes.values
 labels = df.motorvehicle.values
 
 train_dataset = prepare_data(sentences, labels, max_len, tokenizer)
@@ -164,11 +164,11 @@ model = BertForSequenceClassification.from_pretrained(
 # set correct variables
 n = 2
 description = "Burg data, car model 2" # description appended to log files 
-training_set = 'data/train_white_burg.csv'
+training_set = 'data/.csv'
 
 ## read in the training set #######
 df = pd.read_csv(training_set, engine = 'c')
-sentences = df.text_clean.values
+sentences = df.CrimeNotes.values
 labels = df.motorvehicle.values
 
 train_dataset = prepare_data(sentences, labels, max_len, tokenizer)
@@ -432,5 +432,12 @@ torch.save(model.state_dict(), model_name)
 ##this uses the validation set to get model metrics
 save_results_to = 'data/results_val_' +str(n) + '.csv'
 
-
-label_unlabelled('data/validation_set_2.csv', save_results_to , max_len, tokenizer, model, 'TRUE', description)
+label_unlabelled(test_df_filename = 'data/validation_set_2_recode.csv', 
+                 out_filename = save_results_to,
+                 text_col = 'CrimeNotes',
+                 label_col = 'motorvehicle',
+                 max_len = max_len, 
+                 tokenizer = tokenizer, 
+                 model = model, 
+                 metrics = 'TRUE', 
+                 description = description)

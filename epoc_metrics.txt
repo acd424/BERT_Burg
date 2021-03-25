@@ -46,3 +46,126 @@ epoch
 
 
 ##################################################
+2021-03-23 14:45:10.800570
+data/data_for_label.csv
+Burg data, car model 1
+Total training took 0:26:28 (h:mm:ss)
+       Training Loss Training Time  Valid. Accur.  Valid. Loss Validation Time
+epoch                                                                         
+1               0.42       0:03:54           0.92         0.30         0:02:52
+2               0.35       0:03:42           0.92         0.27         0:02:52
+3               0.29       0:03:42           0.92         0.27         0:02:50
+4               0.34       0:03:44           0.92         0.27         0:02:51
+
+
+##################################################
+2021-03-23 16:32:10.231003
+data/data_for_label_updated.csv
+Burg data, car model 2
+Total training took 0:41:08 (h:mm:ss)
+       Training Loss Training Time  Valid. Accur.  Valid. Loss Validation Time
+epoch                                                                         
+1               0.66       0:07:23           0.92         0.62         0:02:50
+2               0.66       0:07:22           0.92         0.62         0:02:52
+3               0.66       0:07:24           0.92         0.62         0:02:52
+4               0.67       0:07:32           0.92         0.62         0:02:53
+
+
+##################################################
+2021-03-23 17:18:29.680895
+data/data_for_label_updated_2.csv
+Burg data, car model 3
+Total training took 0:40:12 (h:mm:ss)
+       Training Loss Training Time  Valid. Accur.  Valid. Loss Validation Time
+epoch                                                                         
+1               0.59       0:07:13           0.92         0.58         0:02:51
+2               0.58       0:07:12           0.92         0.58         0:02:52
+3               0.59       0:07:12           0.92         0.58         0:02:51
+4               0.58       0:07:10           0.92         0.58         0:02:51
+
+
+##################################################
+2021-03-23 18:37:17.664870
+data/data_for_label_updated_3.csv
+Burg data, car model 4
+Total training took 1:10:34 (h:mm:ss)
+       Training Loss Training Time  Valid. Accur.  Valid. Loss Validation Time
+epoch                                                                         
+1               0.73       0:14:50           0.92         0.39         0:02:52
+2               0.73       0:14:46           0.92         0.39         0:02:51
+3               0.73       0:14:47           0.92         0.39         0:02:51
+4               0.74       0:14:45           0.92         0.39         0:02:52
+
+
+##################################################
+2021-03-23 20:24:09.706214
+data/data_for_label_updated_4.csv
+Burg data, car model 5
+Total training took 1:26:15 (h:mm:ss)
+       Training Loss Training Time  Valid. Accur.  Valid. Loss Validation Time
+epoch                                                                         
+1               0.75       0:18:46           0.92         0.38         0:02:52
+2               0.75       0:18:54           0.92         0.38         0:02:52
+3               0.75       0:18:33           0.92         0.38         0:02:52
+4               0.75       0:18:33           0.92         0.38         0:02:53
+
+
+##################################################
+2021-03-24 11:08:41.419827
+data/data_for_label_updated_5.csv
+Burg data, car model 6
+Total training took 1:41:23 (h:mm:ss)
+       Training Loss Training Time  Valid. Accur.  Valid. Loss Validation Time
+epoch                                                                         
+1               0.69       0:22:22           0.74         0.67         0:02:52
+2               0.69       0:22:14           0.74         0.67         0:02:53
+3               0.69       0:22:14           0.74         0.67         0:02:51
+4               0.70       0:22:56           0.74         0.67         0:03:01
+
+
+##################################################
+2021-03-24 13:09:50.662349
+data/data_for_label_updated_5.csv
+Burg data, car model 6
+Total training took 1:41:49 (h:mm:ss)
+       Training Loss Training Time  Valid. Accur.  Valid. Loss Validation Time
+epoch                                                                         
+1               0.69       0:22:46           0.71         0.67         0:02:51
+2               0.69       0:22:35           0.71         0.67         0:02:52
+3               0.69       0:22:18           0.71         0.67         0:02:54
+4               0.69       0:22:39           0.71         0.67         0:02:53
+
+
+##################################################
+2021-03-24 18:43:07.425571
+data/test_code.csv
+Burg data, car model 6
+Total training took 1:42:21 (h:mm:ss)
+       Training Loss Training Time  Valid. Accur.  Valid. Loss Validation Time
+epoch                                                                         
+1               0.69       0:22:30           0.71         0.67         0:02:53
+2               0.69       0:22:34           0.71         0.67         0:02:54
+3               0.69       0:22:24           0.71         0.67         0:02:52
+4               0.69       0:23:19           0.71         0.67         0:02:54
+
+
+##################################################
+2021-03-25 00:17:47.564929
+data/test_code.csv
+Burg data, car model 1
+Total training took 4:14:52 (h:mm:ss)
+       Training Loss Training Time  Valid. Accur.  Valid. Loss Validation Time
+epoch                                                                         
+1           6.80e-01       0:22:45           0.95         0.54         0:02:53
+2           4.20e-01       0:22:38           0.98         0.12         0:02:52
+3           1.79e-01       0:22:32           0.98         0.08         0:02:51
+4           1.02e-01       0:22:35           0.98         0.11         0:02:52
+5           5.94e-02       0:22:34           0.97         0.13         0:02:52
+6           3.25e-02       0:22:34           0.98         0.12         0:03:01
+7           8.49e-03       0:22:38           0.97         0.15         0:02:55
+8           2.64e-03       0:22:34           0.97         0.18         0:02:52
+9           1.41e-03       0:22:33           0.97         0.18         0:02:53
+10          1.17e-03       0:22:34           0.97         0.18         0:02:52
+
+
+##################################################

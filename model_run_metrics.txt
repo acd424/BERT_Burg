@@ -1,0 +1,156 @@
+2021-03-23 15:30:35.456617
+data/results_val_2.csv
+Burg data, car model 1
+
+ the matthews corrcoef is :0.0
+
+ the f1 score is:0.0
+
+ the precision is:0.0
+
+ the recall is:0.0
+##################################################
+2021-03-23 15:43:52.859111
+data/results_val_1.csv
+Burg data, car model 1
+
+ the matthews corrcoef is :0.0
+
+ the f1 score is:0.0
+
+ the precision is:0.0
+
+ the recall is:0.0
+##################################################
+2021-03-23 16:35:11.938744
+data/results_val_2.csv
+Burg data, car model 2
+
+ the matthews corrcoef is :-0.021580988616979723
+
+ the f1 score is:0.0
+
+ the precision is:0.0
+
+ the recall is:0.0
+##################################################
+2021-03-23 17:21:30.466119
+data/results_val_3.csv
+Burg data, car model 3
+
+ the matthews corrcoef is :0.0
+
+ the f1 score is:0.0
+
+ the precision is:0.0
+
+ the recall is:0.0
+##################################################
+2021-03-23 18:40:18.141912
+data/results_val_4.csv
+Burg data, car model 4
+
+ the matthews corrcoef is :0.0
+
+ the f1 score is:0.0
+
+ the precision is:0.0
+
+ the recall is:0.0
+##################################################
+2021-03-23 20:27:10.119541
+data/results_val_5.csv
+Burg data, car model 5
+
+ the matthews corrcoef is :0.0
+
+ the f1 score is:0.0
+
+ the precision is:0.0
+
+ the recall is:0.0
+##################################################
+2021-03-24 11:11:43.666146
+data/results_val_6.csv
+Burg data, car model 6
+
+ the matthews corrcoef is :-0.10648158575302956
+
+ the f1 score is:0.03571428571428572
+
+ the precision is:0.025
+
+ the recall is:0.0625
+##################################################
+2021-03-24 13:12:51.836664
+data/results_val_6.csv
+Burg data, car model 6
+
+ the matthews corrcoef is :-0.10648158575302956
+
+ the f1 score is:0.03571428571428572
+
+ the precision is:0.025
+
+ the recall is:0.0625
+##################################################
+2021-03-24 13:45:19.900974
+data/results_val_6.csv
+Burg data, car model 6
+
+ the matthews corrcoef is :0.0289909586220085
+
+ the f1 score is:0.2872340425531915
+
+ the precision is:0.46153846153846156
+
+ the recall is:0.2084942084942085
+##################################################
+2021-03-24 14:20:27.397505
+data/results_val_6.csv
+Burg data, car model 6
+
+ the matthews corrcoef is :-0.10648158575302956
+
+ the f1 score is:0.03571428571428572
+
+ the precision is:0.025
+
+ the recall is:0.0625
+##################################################
+2021-03-24 18:46:10.441638
+data/results_val_6.csv
+Burg data, car model 6
+
+ the matthews corrcoef is :-0.10648158575302956
+
+ the f1 score is:0.03571428571428572
+
+ the precision is:0.025
+
+ the recall is:0.0625
+##################################################
+2021-03-25 00:20:48.726528
+results_test.csv
+Burg data, car model 1
+
+ the matthews corrcoef is :0.7838112384030916
+
+ the f1 score is:0.7999999999999999
+
+ the precision is:0.7368421052631579
+
+ the recall is:0.875
+##################################################
+2021-03-25 10:47:05.007815
+results_test.csv
+Burg data, car model 1
+
+ the matthews corrcoef is :0.7838112384030916
+
+ the f1 score is:0.7999999999999999
+
+ the precision is:0.7368421052631579
+
+ the recall is:0.875
+##################################################

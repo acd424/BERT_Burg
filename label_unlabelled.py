@@ -4,17 +4,22 @@ Created on Sun Feb 14 11:15:19 2021
 @author: mm18acd
 """
 
-def label_unlabelled(test_df_filename, filename, max_len, tokenizer, model, metrics, description):
+def label_unlabelled(test_df_filename, out_filename,text_col, label_col, max_len, tokenizer, model, metrics, description):
+    
+    # filename is th ename of the file to write to
+    
     import pandas as pd
     import numpy as np
     from prepare_data import prepare_data
     import torch
     from torch.utils.data import DataLoader, SequentialSampler
     import datetime
-    testdf = pd.read_csv(test_df_filename, engine = 'python')
+    
+    #read in the data to be put through the model
+    testdf = pd.read_csv(test_df_filename,encoding = "UTF-8", engine = 'c')
     #testdf.sample(10)
-    sentences = testdf.CrimeNotes.values
-    labels = testdf.motorvehicle.values
+    sentences = testdf[text_col].values
+    labels = testdf[label_col].values
 
 # Set the batch size.  
     batch_size = 32
@@ -107,7 +112,7 @@ def label_unlabelled(test_df_filename, filename, max_len, tokenizer, model, metr
     x = np.concatenate(output_1).ravel()
     testdf["label_1"] = x
 
-    testdf.to_csv(filename) #this is the results from test on validation set
+    testdf.to_csv(out_filename) #this is the results from test on validation set
     print('...Done..... Now metrics')
     m_c =  matthews_corrcoef(testdf.motorvehicle, testdf.new_label)
     f1 = f1_score(testdf.motorvehicle, testdf.new_label)
@@ -120,7 +125,7 @@ def label_unlabelled(test_df_filename, filename, max_len, tokenizer, model, metr
         outfile = open(' model_run_metrics.txt', 'a')
     
         print(datetime.datetime.now(), file = outfile)
-        print(filename, file = outfile)
+        print(out_filename, file = outfile)
         print(description, file = outfile)
         print('\n the matthews corrcoef is :' + str(m_c), file = outfile)
         print('\n the f1 score is:' + str(f1),file = outfile)
