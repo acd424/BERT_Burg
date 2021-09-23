@@ -9,7 +9,7 @@ Created on Sat Feb 13 14:59:39 2021
 def prepare_data(sentences, labels, max_len, tokenizer):
     
     import torch
-    from torch.utils.data import TensorDataset, random_split
+    from torch.utils.data import TensorDataset, random_split, Dataset
 
     print('Processing train data')
 # Tokenize all of the sentences and map the tokens to their word IDs.
